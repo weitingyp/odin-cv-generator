@@ -12,10 +12,24 @@ function Form(){
     return (
         <div id="cv-form-container">
             <form>
-                <label htmlFor="name">Name</label>
-                <input id="name"/>
+                <DetailsFieldSet />
             </form>
         </div>
+    )
+}
+
+function DetailsFieldSet(){
+    return (
+        <fieldset id="details-fieldset">
+            <legend>Personal Details</legend>
+            <label htmlFor="name">Name:</label>
+            <input id="name"/>
+            <label htmlFor="email">Email</label>
+            <input id="email" type="email"/>
+            <label htmlFor="city">City</label>
+            <input id="city" />
+            <input type="button" value="Generate"/>
+        </fieldset>
     )
 }
 
