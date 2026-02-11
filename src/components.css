@@ -1,0 +1,9 @@
+#header{
+    text-align: center;
+}
+
+#cv-form-container, #generated-cv-container{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
