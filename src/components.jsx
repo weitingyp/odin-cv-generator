@@ -1,4 +1,5 @@
 import './components.css'
+import { useState } from 'react'
 
 function Header(){
     return (
@@ -8,37 +9,66 @@ function Header(){
     )
 }
 
-function Form(){
+function Container(){
+
+    const [detailsArray, setDetailsArray] = useState({
+        'name': 'Example Person',
+        'email': 'example@example.com',
+        'city': 'Example City'
+    })
+
+    function handleInputChange(e){
+        setDetailsArray({...detailsArray, [e.target.name]: e.target.value});
+    }
+
+    return (
+        <div id="main-container">
+            <Form detailsArray={detailsArray} handleChange={handleInputChange}/>
+            <GeneratedCV detailsArray={detailsArray}/>
+        </div>
+    )
+}
+
+function Form({detailsArray, handleChange}){
     return (
         <div id="cv-form-container">
-            <form>
-                <DetailsFieldSet />
+            <form onChange={handleChange}>
+                <DetailsFieldSet detailsArray={detailsArray}/>
             </form>
         </div>
     )
 }
 
-function DetailsFieldSet(){
+function DetailsFieldSet({detailsArray}){
     return (
         <fieldset id="details-fieldset">
             <legend>Personal Details</legend>
             <label htmlFor="name">Name:</label>
-            <input id="name"/>
+            <input name="name" value={detailsArray.name}/>
             <label htmlFor="email">Email</label>
-            <input id="email" type="email"/>
+            <input name="email" type="email" value={detailsArray.email}/>
             <label htmlFor="city">City</label>
-            <input id="city" />
-            <input type="button" value="Generate"/>
+            <input name="city" value={detailsArray.city}/>
         </fieldset>
     )
 }
 
-function GeneratedCV(){
+function GeneratedCV({detailsArray}){
     return (
         <div id="generated-cv-container">
-            <p>Generated CV here</p>
+            <DetailsSection detailsArray={detailsArray}/>
         </div>
     )
 }
 
-export { Header, Form, GeneratedCV }
+function DetailsSection({detailsArray}){
+    return (
+        <div id="details-section">
+            <h2>{detailsArray.name}</h2>
+            {detailsArray.email} | {detailsArray.city}
+            <hr />
+        </div>
+    )
+}
+
+export { Header, Container }
