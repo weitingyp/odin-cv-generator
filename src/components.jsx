@@ -31,31 +31,31 @@ function Container(){
         'end-year': 2001
     })
 
-    function handleInputChange(e){
+    function handleDetailsChange(e){
         setDetailsArray({...detailsArray, [e.target.name]: e.target.value});
     }
 
     return (
         <div id="main-container">
-            <Form detailsArray={detailsArray} handleChange={handleInputChange}/>
+            <Form detailsArray={detailsArray} handleDetailsChange={handleDetailsChange}/>
             <GeneratedCV detailsArray={detailsArray} positionArray={positionArray}/>
         </div>
     )
 }
 
-function Form({detailsArray, handleChange}){
+function Form({detailsArray, handleDetailsChange}){
     return (
         <div id="cv-form-container">
-            <form onChange={handleChange}>
-                <DetailsFieldSet detailsArray={detailsArray}/>
+            <form>
+                <DetailsFieldSet detailsArray={detailsArray} handleDetailsChange={handleDetailsChange}/>
             </form>
         </div>
     )
 }
 
-function DetailsFieldSet({detailsArray}){
+function DetailsFieldSet({detailsArray, handleDetailsChange}){
     return (
-        <fieldset id="details-fieldset">
+        <fieldset id="details-fieldset" onChange={handleDetailsChange}>
             <legend>Personal Details</legend>
             <label htmlFor="name">Name:</label>
             <input name="name" value={detailsArray.name}/>
