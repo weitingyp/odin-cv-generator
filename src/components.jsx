@@ -1,3 +1,4 @@
+import { use } from 'react'
 import './components.css'
 import { useState } from 'react'
 
@@ -17,19 +18,41 @@ function Container(){
         'city': 'Example City'
     })
 
-    const [positionArray, setPositionArray] = useState({
-        'company': 'Company ABC',
-        'title': 'Senior XYZ',
-        'current': false, // true or false
-        'duties': {
-            [crypto.randomUUID()]: 'Achieved ABC by doing XYZ', 
-            [crypto.randomUUID()]: 'Grew ABC by championing XYZ'
-        },
-        'start-month': 'Jan',
-        'start-year': 2000,
-        'end-month': 'Dec', // if past: null end-month, end-year
-        'end-year': 2001
-    })
+    // positionHistory is an array of objects for each position entered
+    const [positionHistory, setPositionHistory] = useState([
+        {
+            position: {
+                company: 'company ABC'
+                , title: 'senior XYZ'
+                , current: false
+                , duties: {
+                    [crypto.randomUUID()]: 'Achieved ABC by doing XYZ', 
+                    [crypto.randomUUID()]: 'Grew ABC by championing XYZ'
+                }
+                , startMonth: 'Jan'
+                , startYear: 2000
+                , endMonth: 'Dec'
+                , endYear: 2001
+            }
+            , id: crypto.randomUUID()
+        }
+    ])
+
+    function addNewPosition( company = 'company ABC'
+                            , title = 'senior XYZ'
+                            , current = false
+                            , duties = {
+                                [crypto.randomUUID()]: 'Achieved ABC by doing XYZ', 
+                                [crypto.randomUUID()]: 'Grew ABC by championing XYZ'
+                            }
+                            , startMonth = 'Jan'
+                            , startYear = 2000
+                            , endMonth = 'Dec'
+                            , endYear = 2001
+    ){
+        let positionArray = {company, title, current, duties, startMonth, startYear, endMonth, endYear};
+        setPositionHistory([...positionHistory, {position: positionArray, id: crypto.randomUUID()}]);
+    }
 
     function handleDetailsChange(e){
         setDetailsArray({...detailsArray, [e.target.name]: e.target.value});
@@ -38,7 +61,7 @@ function Container(){
     return (
         <div id="main-container">
             <Form detailsArray={detailsArray} handleDetailsChange={handleDetailsChange}/>
-            <GeneratedCV detailsArray={detailsArray} positionArray={positionArray}/>
+            <GeneratedCV detailsArray={detailsArray} positionHistory={positionHistory}/>
         </div>
     )
 }
@@ -67,11 +90,11 @@ function DetailsFieldSet({detailsArray, handleDetailsChange}){
     )
 }
 
-function GeneratedCV({detailsArray, positionArray}){
+function GeneratedCV({detailsArray, positionHistory}){
     return (
         <div id="generated-cv-container">
             <DetailsSection detailsArray={detailsArray}/>
-            <PositionItem positionArray={positionArray}/>
+            { positionHistory.map( (positionEntry) => <PositionItem key={positionEntry.id} positionArray={positionEntry.position}/>)}
         </div>
     )
 }
@@ -92,9 +115,9 @@ function PositionItem({positionArray}){
             <h3>{positionArray.title}</h3>
             <em>{positionArray.company}</em>
             <div className="position-dates"> 
-                {positionArray["start-month"]+', '+positionArray["start-year"]} 
+                {positionArray.startMonth+', '+positionArray.startYear} 
                 &mdash;
-                {positionArray.current ? 'present' : (positionArray["end-month"]+', '+positionArray["end-year"])}
+                {positionArray.current ? 'present' : (positionArray.endMonth+', '+positionArray.endYear)}
             </div>
             <ul>
                 {Object.entries(positionArray.duties).map(([key, duty]) => (
