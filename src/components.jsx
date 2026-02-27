@@ -156,8 +156,8 @@ function PositionFieldSet({positionArray, handlePositionChange, handleAddPositio
     const today = new Date();
     return (
         <>
-            <button id="add-position-btn" type="button" onClick={handleAddPositionClick}>Add new position</button>
             <fieldset id="position-fieldset" onChange={handlePositionChange}>
+            <button id="add-position-btn" type="button" onClick={handleAddPositionClick}>Add new position</button>
             <legend>Position</legend>
             <label htmlFor="title">Title:</label>
             <input id="title" name="title" value={positionArray.title}/>

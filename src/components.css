@@ -37,6 +37,8 @@ fieldset{
 
 input, select, form button{
     background-color: thistle;
+    border: none;
+    padding: 3.5px 0;
 }
 
 form button{
@@ -47,6 +49,16 @@ form button{
 form button:hover{
     background-color: plum;
     cursor: pointer;
+}
+
+#position-fieldset{
+    position: relative;
+}
+
+#add-position-btn{
+    position: absolute;
+    top: -5px;
+    right: 5px;
 }
 
 li{
