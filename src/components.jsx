@@ -72,11 +72,11 @@ function Container(){
     }
 
     function handlePositionChange(e){
-        let entry = positionHistory.filter( _ => _.id === activePosIndex )[0];
-        entry = { position: {...entry.position, [e.target.name]: e.target.value} , id: entry.id };
-        let modifiedPositionHistory = positionHistory.filter( _ => _.id !== activePosIndex );
-        modifiedPositionHistory.push(entry);
-        setPositionHistory(modifiedPositionHistory);
+        setPositionHistory(
+            positionHistory.map( _ => {
+                if (_.id === activePosIndex) return { position: {..._.position, [e.target.name]: e.target.value} , id: _.id }
+                else return _;
+    }));
     }
 
     function handleAddPositionClick(e){
