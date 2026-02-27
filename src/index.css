@@ -46,3 +46,27 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+#root{
+    font-family: 'Arial', sans-serif;
+    line-height: 1.15;
+}
+
+h1 {
+    font-size: 30px;
+    padding: 10px;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+h3{
+    font-weight: bold;
+    padding-top: 5px;
+    padding-bottom: 2px;
+}
+
+em{
+    font-style: italic;
+}

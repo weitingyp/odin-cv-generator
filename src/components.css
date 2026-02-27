@@ -19,3 +19,9 @@ fieldset{
     flex-direction: column;
     gap: 5px;
 }
+
+li{
+    list-style-type: disc;
+    margin-left: 20px;
+    padding: 2px 0px;
+}
