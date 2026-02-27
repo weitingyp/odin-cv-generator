@@ -1,11 +1,23 @@
 # React + Vite: CV Generator Project
 
+Access the project at https://odin-cv-generator-nine.vercel.app/ 
+
 ## Summary
-Built a CV generator app (The Odin Project syllabus) to practice React. One can add their personal details, multiple position entries, and one education entry. All data can be edited and loaded dynamically. Positions must be selected for active editing.
+A CV generator app built with React. Users can manage multiple work experience entries, edit personal details and education, and see changes reflected live in a formatted CV preview.
+
+## Features
+
+- Add, edit, and delete multiple work experience entries
+- Live CV preview that updates as you type
+- Conditional fields (end date hidden for current positions)
+- Click-to-edit interaction on CV preview
 
 ## Technologies Used
-- Vite framework 
-- React (components, rendering lists or arrays, state, lifting up state, passing props, event handlers)
+- Vite
+- React
+
+## What I learnt
+Component architecture, lifting state up, controlled vs uncontrolled inputs, event bubbling
 
 ## Future improvements
 - Styling of the app is rudimentary: improve aesthetics
