@@ -91,11 +91,11 @@ function DetailsFieldSet({detailsArray, handleDetailsChange}){
         <fieldset id="details-fieldset" onChange={handleDetailsChange}>
             <legend>Personal Details</legend>
             <label htmlFor="name">Name:</label>
-            <input name="name" value={detailsArray.name}/>
+            <input id="name" name="name" value={detailsArray.name}/>
             <label htmlFor="email">Email</label>
-            <input name="email" type="email" value={detailsArray.email}/>
+            <input id="email" name="email" type="email" value={detailsArray.email}/>
             <label htmlFor="city">City</label>
-            <input name="city" value={detailsArray.city}/>
+            <input id="city" name="city" value={detailsArray.city}/>
         </fieldset>
     )
 }
@@ -106,11 +106,11 @@ function PositionFieldSet({positionArray, handlePositionChange}){
             <fieldset id="position-fieldset" onChange={handlePositionChange}>
             <legend>Position</legend>
             <label htmlFor="title">Title:</label>
-            <input name="title" value={positionArray.title}/>
+            <input id="title" name="title" value={positionArray.title}/>
             <label htmlFor="company">Company</label>
-            <input name="company" value={positionArray.company}/>
+            <input id="company" name="company" value={positionArray.company}/>
             <label htmlFor="startMonth">Start month</label>
-            <select name="startMonth">
+            <select id="startMonth" name="startMonth">
                 <option value="Jan">January</option>
                 <option value="Feb">February</option>
                 <option value="Mar">March</option>
@@ -125,9 +125,9 @@ function PositionFieldSet({positionArray, handlePositionChange}){
                 <option value="Dec">December</option>
             </select>
             <label htmlFor="startYear"> Start year </label>
-            <input name="startYear" type="number" min="1900" max={today.getFullYear()} value={positionArray.startYear} />
-            <label htmlFor="End Month">End month</label>
-            <select name="End Month">
+            <input id="startYear" name="startYear" type="number" min="1900" max={today.getFullYear()} value={positionArray.startYear} />
+            <label htmlFor="endMonth">End month</label>
+            <select id="endMonth" name="endMonth">
                 <option value="Jan">January</option>
                 <option value="Feb">February</option>
                 <option value="Mar">March</option>
@@ -142,7 +142,7 @@ function PositionFieldSet({positionArray, handlePositionChange}){
                 <option value="Dec">December</option>
             </select>
             <label htmlFor="endYear"> End year </label>
-            <input name="endYear" type="number" min="1900" max={today.getFullYear()} value={positionArray.endYear} />
+            <input id="endYear" name="endYear" type="number" min="1900" max={today.getFullYear()} value={positionArray.endYear} />
             </fieldset>
     )
 }
