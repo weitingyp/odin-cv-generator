@@ -39,6 +39,15 @@ function Container(){
 
     const [ activePosIndex, setActivePosIndex] = useState(positionHistory[0].id)
 
+    const [educationArray, setEducationArray] = useState({
+        'school': 'Example University',
+        'course': 'Example Course',
+        'startMonth': 'Jan',
+        'startYear': 2000,
+        'endMonth': 'Dec',
+        'endYear': 2001
+    })
+
     function addNewPosition( company = 'company ABC'
                             , title = 'senior XYZ'
                             , current = false
@@ -67,20 +76,31 @@ function Container(){
         setPositionHistory(modifiedPositionHistory);
     }
 
+    function handleEducationChange(e){
+        setEducationArray({...educationArray, [e.target.name]: e.target.value});
+    }
+
     return (
         <div id="main-container">
-            <Form detailsArray={detailsArray} handleDetailsChange={handleDetailsChange} activePosArray={positionHistory.filter(_ => _.id === activePosIndex)[0].position} handlePositionChange={handlePositionChange}/>
+            <Form 
+                detailsArray={detailsArray} 
+                handleDetailsChange={handleDetailsChange} 
+                activePosArray={positionHistory.filter(_ => _.id === activePosIndex)[0].position} 
+                handlePositionChange={handlePositionChange} 
+                educationArray={educationArray} 
+                handleEducationChange={handleEducationChange}/>
             <GeneratedCV detailsArray={detailsArray} positionHistory={positionHistory}/>
         </div>
     )
 }
 
-function Form({detailsArray, handleDetailsChange, activePosArray, handlePositionChange}){
+function Form({detailsArray, handleDetailsChange, activePosArray, handlePositionChange, educationArray, handleEducationChange}){
     return (
         <div id="cv-form-container">
             <form>
                 <DetailsFieldSet detailsArray={detailsArray} handleDetailsChange={handleDetailsChange}/>
                 <PositionFieldSet positionArray={activePosArray} handlePositionChange={handlePositionChange}/>
+                <EducationFieldSet educationArray={educationArray} handleEducationChange={handleEducationChange}/>
             </form>
         </div>
     )
@@ -146,6 +166,54 @@ function PositionFieldSet({positionArray, handlePositionChange}){
             </fieldset>
     )
 }
+
+function EducationFieldSet({educationArray, handleEducationChange}){
+    const today = new Date();
+    return (
+            <fieldset id="education-fieldset" onChange={handleEducationChange}>
+            <legend>Education</legend>
+            <label htmlFor="school">School</label>
+            <input id="school" name="school" value={educationArray.school}/>
+            <label htmlFor="course">Course of Study</label>
+            <input id="course" name="course" value={educationArray.course}/>
+            <label htmlFor="startMonth">Start month</label>
+            <select id="startMonth" name="startMonth">
+                <option value="Jan">January</option>
+                <option value="Feb">February</option>
+                <option value="Mar">March</option>
+                <option value="Apr">April</option>
+                <option value="May">May</option>
+                <option value="Jun">June</option>
+                <option value="Jul">July</option>
+                <option value="Aug">August</option>
+                <option value="Sep">September</option>
+                <option value="Oct">October</option>
+                <option value="Nov">November</option>
+                <option value="Dec">December</option>
+            </select>
+            <label htmlFor="startYear"> Start year </label>
+            <input id="startYear" name="startYear" type="number" min="1900" max={today.getFullYear()} value={educationArray.startYear} />
+            <label htmlFor="endMonth">End month</label>
+            <select id="endMonth" name="endMonth">
+                <option value="Jan">January</option>
+                <option value="Feb">February</option>
+                <option value="Mar">March</option>
+                <option value="Apr">April</option>
+                <option value="May">May</option>
+                <option value="Jun">June</option>
+                <option value="Jul">July</option>
+                <option value="Aug">August</option>
+                <option value="Sep">September</option>
+                <option value="Oct">October</option>
+                <option value="Nov">November</option>
+                <option value="Dec">December</option>
+            </select>
+            <label htmlFor="endYear"> End year </label>
+            <input id="endYear" name="endYear" type="number" min="1900" max={today.getFullYear()} value={educationArray.endYear} />
+            </fieldset>
+    )
+}
+
 
 function GeneratedCV({detailsArray, positionHistory}){
     return (
