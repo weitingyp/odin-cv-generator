@@ -80,6 +80,20 @@ function Container(){
         setEducationArray({...educationArray, [e.target.name]: e.target.value});
     }
 
+    function handleEditClick(e, id){
+        e.stopPropagation();
+        setActivePosIndex(id);
+    }
+
+    function handleDeleteClick(e, id){
+        e.stopPropagation();
+        if(positionHistory.length === 1){
+            alert('You must have at least one position entry. To delete this entry, first add another position entry, then delete this one.');
+            return;
+        }
+        else setPositionHistory(positionHistory.filter( _ => _.id !== id ));
+    }
+
     return (
         <div id="main-container">
             <Form 
@@ -89,7 +103,13 @@ function Container(){
                 handlePositionChange={handlePositionChange} 
                 educationArray={educationArray} 
                 handleEducationChange={handleEducationChange}/>
-            <GeneratedCV detailsArray={detailsArray} positionHistory={positionHistory} educationArray={educationArray}/>
+            <GeneratedCV 
+                detailsArray={detailsArray} 
+                positionHistory={positionHistory} 
+                educationArray={educationArray}
+                handleEditClick={handleEditClick}
+                handleDeleteClick={handleDeleteClick}
+                />
         </div>
     )
 }
@@ -215,13 +235,18 @@ function EducationFieldSet({educationArray, handleEducationChange}){
 }
 
 
-function GeneratedCV({detailsArray, positionHistory, educationArray}){
+function GeneratedCV({detailsArray, positionHistory, educationArray, handleEditClick, handleDeleteClick}){
     return (
         <div id="generated-cv-container">
             <DetailsSection detailsArray={detailsArray}/>
             <h2>Experience</h2>
             { positionHistory.map( (positionEntry) => 
-                <PositionItem key={positionEntry.id} positionArray={positionEntry.position}/>
+                <PositionItem 
+                key={positionEntry.id} 
+                id={positionEntry.id} 
+                positionArray={positionEntry.position} 
+                handleEditClick={handleEditClick} 
+                handleDeleteClick={handleDeleteClick}/>
             )}
             <h2>Education</h2>
             <EducationItem educationArray={educationArray}/>
@@ -239,11 +264,11 @@ function DetailsSection({detailsArray}){
     )
 }
 
-function PositionItem({positionArray}){
+function PositionItem({positionArray, id, handleEditClick, handleDeleteClick}){
     const [isClicked, setIsClicked] = useState(false);
 
     return (
-        <div className="position-item" onClick={() => setIsClicked(true)}>
+        <div className="position-item" id={positionArray.id} onClick={() => setIsClicked(true)}>
             <h3>{positionArray.title}</h3>
             <em>{positionArray.company}</em>
             <div className="position-dates"> 
@@ -258,8 +283,8 @@ function PositionItem({positionArray}){
             </ul>
             {
             isClicked && <div className="position-item-modal">
-                <button className="position-edit-btn">Edit</button>
-                <button className="position-delete-btn">Delete</button>
+                <button className="position-edit-btn" onClick={(e) => handleEditClick(e, id)}>Edit</button>
+                <button className="position-delete-btn" onClick={(e) => handleDeleteClick(e, id)}>Delete</button>
                 <button className="position-item-hover-close-btn" onClick={(e) => {
                     e.stopPropagation();
                     setIsClicked(false);
