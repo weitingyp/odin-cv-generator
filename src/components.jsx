@@ -73,7 +73,7 @@ function Container(){
     function handlePositionChange(e){
         setPositionHistory(
             positionHistory.map( _ => {
-                if (_.id === activePosIndex) return { position: {..._.position, [e.target.name]: e.target.value} , id: _.id }
+                if (_.id === activePosIndex) return { position: {..._.position, [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value} , id: _.id }
                 else return _;
     }));
     }
@@ -181,24 +181,31 @@ function PositionFieldSet({positionArray, handlePositionChange, handleAddPositio
             </select>
             <label htmlFor="startYear"> Start year </label>
             <input id="startYear" name="startYear" type="number" min="1900" max={today.getFullYear()} value={positionArray.startYear} />
-            <label htmlFor="endMonth">End month</label>
-            <select id="endMonth" name="endMonth" value={positionArray.endMonth}>
-                <option value="Jan">January</option>
-                <option value="Feb">February</option>
-                <option value="Mar">March</option>
-                <option value="Apr">April</option>
-                <option value="May">May</option>
-                <option value="Jun">June</option>
-                <option value="Jul">July</option>
-                <option value="Aug">August</option>
-                <option value="Sep">September</option>
-                <option value="Oct">October</option>
-                <option value="Nov">November</option>
-                <option value="Dec">December</option>
-            </select>
-            <label htmlFor="endYear"> End year </label>
-            <input id="endYear" name="endYear" type="number" min="1900" max={today.getFullYear()} value={positionArray.endYear} />
-            </fieldset>
+            <div>
+                <input id="current" name="current" type="checkbox" checked={positionArray.current}/>
+                <label htmlFor="current">Current position?</label>
+            </div>
+            { !positionArray.current && 
+            <>
+                <label htmlFor="endMonth">End month</label>
+                <select id="endMonth" name="endMonth" value={positionArray.endMonth}>
+                    <option value="Jan">January</option>
+                    <option value="Feb">February</option>
+                    <option value="Mar">March</option>
+                    <option value="Apr">April</option>
+                    <option value="May">May</option>
+                    <option value="Jun">June</option>
+                    <option value="Jul">July</option>
+                    <option value="Aug">August</option>
+                    <option value="Sep">September</option>
+                    <option value="Oct">October</option>
+                    <option value="Nov">November</option>
+                    <option value="Dec">December</option>
+                </select>
+                <label htmlFor="endYear"> End year </label>
+                <input id="endYear" name="endYear" type="number" min="1900" max={today.getFullYear()} value={positionArray.endYear} />
+            </>
+            }</fieldset>
         </>
     )
 }
