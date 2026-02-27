@@ -61,7 +61,10 @@ function Container(){
                             , endYear = 2001
     ){
         let positionArray = {company, title, current, duties, startMonth, startYear, endMonth, endYear};
-        setPositionHistory([...positionHistory, {position: positionArray, id: crypto.randomUUID()}]);
+        const id = crypto.randomUUID();
+        setPositionHistory([...positionHistory, {position: positionArray, id}]);
+        console.log(positionHistory);
+        setActivePosIndex(id);
     }
 
     function handleDetailsChange(e){
@@ -74,6 +77,10 @@ function Container(){
         let modifiedPositionHistory = positionHistory.filter( _ => _.id !== activePosIndex );
         modifiedPositionHistory.push(entry);
         setPositionHistory(modifiedPositionHistory);
+    }
+
+    function handleAddPositionClick(e){
+        addNewPosition();
     }
 
     function handleEducationChange(e){
@@ -101,6 +108,7 @@ function Container(){
                 handleDetailsChange={handleDetailsChange} 
                 activePosArray={positionHistory.filter(_ => _.id === activePosIndex)[0].position} 
                 handlePositionChange={handlePositionChange} 
+                handleAddPositionClick={handleAddPositionClick}
                 educationArray={educationArray} 
                 handleEducationChange={handleEducationChange}/>
             <GeneratedCV 
@@ -114,12 +122,12 @@ function Container(){
     )
 }
 
-function Form({detailsArray, handleDetailsChange, activePosArray, handlePositionChange, educationArray, handleEducationChange}){
+function Form({detailsArray, handleDetailsChange, activePosArray, handlePositionChange, educationArray, handleEducationChange, handleAddPositionClick}){
     return (
         <div id="cv-form-container">
             <form>
                 <DetailsFieldSet detailsArray={detailsArray} handleDetailsChange={handleDetailsChange}/>
-                <PositionFieldSet positionArray={activePosArray} handlePositionChange={handlePositionChange}/>
+                <PositionFieldSet positionArray={activePosArray} handlePositionChange={handlePositionChange} handleAddPositionClick={handleAddPositionClick}/>
                 <EducationFieldSet educationArray={educationArray} handleEducationChange={handleEducationChange}/>
             </form>
         </div>
@@ -140,9 +148,11 @@ function DetailsFieldSet({detailsArray, handleDetailsChange}){
     )
 }
 
-function PositionFieldSet({positionArray, handlePositionChange}){
+function PositionFieldSet({positionArray, handlePositionChange, handleAddPositionClick}){
     const today = new Date();
     return (
+        <>
+            <button id="add-position-btn" type="button" onClick={handleAddPositionClick}>Add new position</button>
             <fieldset id="position-fieldset" onChange={handlePositionChange}>
             <legend>Position</legend>
             <label htmlFor="title">Title:</label>
@@ -184,6 +194,7 @@ function PositionFieldSet({positionArray, handlePositionChange}){
             <label htmlFor="endYear"> End year </label>
             <input id="endYear" name="endYear" type="number" min="1900" max={today.getFullYear()} value={positionArray.endYear} />
             </fieldset>
+        </>
     )
 }
 
