@@ -1,5 +1,7 @@
 #header{
     text-align: center;
+    background-color: purple;
+    color: white;
 }
 
 #main-container{
@@ -11,13 +13,40 @@
 #cv-form-container, #generated-cv-container{
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    padding: 1.5rem 1rem;
+}
+
+#cv-form-container{
+    background-color: rgb(49, 49, 49);
+    color: white;
+}
+
+legend{
+    font-weight: bold;
+    font-size: 18px;
 }
 
 fieldset{
     display: flex;
     flex-direction: column;
     gap: 5px;
+    border: 1px solid black;
+    padding: 7px;
+    margin: 10px 0px;
+}
+
+input, select, form button{
+    background-color: thistle;
+}
+
+form button{
+    padding: 5px 5px;
+    border-radius: 5px;
+}
+
+form button:hover{
+    background-color: plum;
+    cursor: pointer;
 }
 
 li{
