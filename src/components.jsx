@@ -263,7 +263,25 @@ function GeneratedCV({detailsArray, positionHistory, educationArray, handleEditC
         <div id="generated-cv-container">
             <DetailsSection detailsArray={detailsArray}/>
             <h2>Experience</h2>
-            { positionHistory.map( (positionEntry) => 
+            { positionHistory
+                .sort( (a, b) => {
+                    if(a.position.current && !b.position.current) return -1;
+                    else if(!a.position.current && b.position.current) return 1;
+                    else {
+                        const aEndYear = a.position.current ? new Date().getFullYear() : a.position.endYear;
+                        const bEndYear = b.position.current ? new Date().getFullYear() : b.position.endYear;
+                        if(aEndYear > bEndYear) return -1;
+                        else if(aEndYear < bEndYear) return 1;
+                        else {
+                            const aStartYear = a.position.startYear;
+                            const bStartYear = b.position.startYear;
+                            if(aStartYear > bStartYear) return -1;
+                            else if(aStartYear < bStartYear) return 1;
+                            else return 0;
+                        }
+                    }
+                })
+                .map( (positionEntry) => 
                 <PositionItem 
                 key={positionEntry.id} 
                 id={positionEntry.id} 
