@@ -263,6 +263,7 @@ function GeneratedCV({detailsArray, positionHistory, educationArray, handleEditC
                 handleEditClick={handleEditClick} 
                 handleDeleteClick={handleDeleteClick}/>
             )}
+            <hr />
             <h2>Education</h2>
             <EducationItem educationArray={educationArray}/>
         </div>

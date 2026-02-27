@@ -72,6 +72,11 @@ li{
     padding: 5px;
 }
 
+.position-item:hover{
+    background-color: rgb(128, 128, 128, 0.25);
+    cursor: pointer;
+}
+
 .position-item-modal{
     position: absolute;
     top: 0;
@@ -99,4 +104,10 @@ li{
     font-weight: bold;
     color: white;
     cursor: pointer;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid black;
+    margin: 1rem 0;
 }
