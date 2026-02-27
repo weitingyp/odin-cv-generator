@@ -219,9 +219,11 @@ function GeneratedCV({detailsArray, positionHistory, educationArray}){
     return (
         <div id="generated-cv-container">
             <DetailsSection detailsArray={detailsArray}/>
+            <h2>Experience</h2>
             { positionHistory.map( (positionEntry) => 
                 <PositionItem key={positionEntry.id} positionArray={positionEntry.position}/>
             )}
+            <h2>Education</h2>
             <EducationItem educationArray={educationArray}/>
         </div>
     )
