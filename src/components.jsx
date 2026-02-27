@@ -98,7 +98,11 @@ function Container(){
             alert('You must have at least one position entry. To delete this entry, first add another position entry, then delete this one.');
             return;
         }
-        else setPositionHistory(positionHistory.filter( _ => _.id !== id ));
+        else {
+            const newPositionHistory = positionHistory.filter( _ => _.id !== id );
+            setPositionHistory(newPositionHistory);
+            setActivePosIndex(newPositionHistory[0].id);
+        }
     }
 
     return (
