@@ -110,7 +110,8 @@ function Container(){
             <Form 
                 detailsArray={detailsArray} 
                 handleDetailsChange={handleDetailsChange} 
-                activePosArray={positionHistory.filter(_ => _.id === activePosIndex)[0].position} 
+                activePosIndex={activePosIndex}
+                positionHistory={positionHistory}
                 handlePositionChange={handlePositionChange} 
                 handleAddPositionClick={handleAddPositionClick}
                 educationArray={educationArray} 
@@ -126,7 +127,8 @@ function Container(){
     )
 }
 
-function Form({detailsArray, handleDetailsChange, activePosArray, handlePositionChange, educationArray, handleEducationChange, handleAddPositionClick}){
+function Form({detailsArray, handleDetailsChange, activePosIndex, positionHistory, handlePositionChange, educationArray, handleEducationChange, handleAddPositionClick}){
+    const activePosArray = positionHistory.filter(_ => _.id === activePosIndex)[0]?.position || {};
     return (
         <div id="cv-form-container">
             <form>
