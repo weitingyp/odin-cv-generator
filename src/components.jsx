@@ -240,8 +240,10 @@ function DetailsSection({detailsArray}){
 }
 
 function PositionItem({positionArray}){
+    const [isClicked, setIsClicked] = useState(false);
+
     return (
-        <div className="position-item">
+        <div className="position-item" onClick={() => setIsClicked(true)}>
             <h3>{positionArray.title}</h3>
             <em>{positionArray.company}</em>
             <div className="position-dates"> 
@@ -254,6 +256,16 @@ function PositionItem({positionArray}){
                     <li key={key}>{duty}</li>
                 ))}
             </ul>
+            {
+            isClicked && <div className="position-item-modal">
+                <button className="position-edit-btn">Edit</button>
+                <button className="position-delete-btn">Delete</button>
+                <button className="position-item-hover-close-btn" onClick={(e) => {
+                    e.stopPropagation();
+                    setIsClicked(false);
+                }}>X</button>
+            </div>
+            }
         </div>
     )
 }
