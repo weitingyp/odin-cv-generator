@@ -89,7 +89,7 @@ function Container(){
                 handlePositionChange={handlePositionChange} 
                 educationArray={educationArray} 
                 handleEducationChange={handleEducationChange}/>
-            <GeneratedCV detailsArray={detailsArray} positionHistory={positionHistory}/>
+            <GeneratedCV detailsArray={detailsArray} positionHistory={positionHistory} educationArray={educationArray}/>
         </div>
     )
 }
@@ -215,11 +215,14 @@ function EducationFieldSet({educationArray, handleEducationChange}){
 }
 
 
-function GeneratedCV({detailsArray, positionHistory}){
+function GeneratedCV({detailsArray, positionHistory, educationArray}){
     return (
         <div id="generated-cv-container">
             <DetailsSection detailsArray={detailsArray}/>
-            { positionHistory.map( (positionEntry) => <PositionItem key={positionEntry.id} positionArray={positionEntry.position}/>)}
+            { positionHistory.map( (positionEntry) => 
+                <PositionItem key={positionEntry.id} positionArray={positionEntry.position}/>
+            )}
+            <EducationItem educationArray={educationArray}/>
         </div>
     )
 }
@@ -249,6 +252,20 @@ function PositionItem({positionArray}){
                     <li key={key}>{duty}</li>
                 ))}
             </ul>
+        </div>
+    )
+}
+
+function EducationItem({educationArray}){
+    return (
+        <div className="education-item">
+            <h3>{educationArray.course}</h3>
+            <em>{educationArray.school}</em>
+            <div className="education-dates"> 
+                {educationArray.startMonth+', '+educationArray.startYear}
+                &mdash;
+                {educationArray.endMonth+', '+educationArray.endYear}
+            </div>
         </div>
     )
 }
