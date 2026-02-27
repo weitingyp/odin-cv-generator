@@ -165,7 +165,7 @@ function PositionFieldSet({positionArray, handlePositionChange, handleAddPositio
             <label htmlFor="company">Company</label>
             <input id="company" name="company" value={positionArray.company}/>
             <label htmlFor="startMonth">Start month</label>
-            <select id="startMonth" name="startMonth">
+            <select id="startMonth" name="startMonth" value={positionArray.startMonth}>
                 <option value="Jan">January</option>
                 <option value="Feb">February</option>
                 <option value="Mar">March</option>
@@ -182,7 +182,7 @@ function PositionFieldSet({positionArray, handlePositionChange, handleAddPositio
             <label htmlFor="startYear"> Start year </label>
             <input id="startYear" name="startYear" type="number" min="1900" max={today.getFullYear()} value={positionArray.startYear} />
             <label htmlFor="endMonth">End month</label>
-            <select id="endMonth" name="endMonth">
+            <select id="endMonth" name="endMonth" value={positionArray.endMonth}>
                 <option value="Jan">January</option>
                 <option value="Feb">February</option>
                 <option value="Mar">March</option>
@@ -213,7 +213,7 @@ function EducationFieldSet({educationArray, handleEducationChange}){
             <label htmlFor="course">Course of Study</label>
             <input id="course" name="course" value={educationArray.course}/>
             <label htmlFor="startMonth">Start month</label>
-            <select id="startMonth" name="startMonth">
+            <select id="startMonth" name="startMonth" value={educationArray.startMonth}>
                 <option value="Jan">January</option>
                 <option value="Feb">February</option>
                 <option value="Mar">March</option>
@@ -230,7 +230,7 @@ function EducationFieldSet({educationArray, handleEducationChange}){
             <label htmlFor="startYear"> Start year </label>
             <input id="startYear" name="startYear" type="number" min="1900" max={today.getFullYear()} value={educationArray.startYear} />
             <label htmlFor="endMonth">End month</label>
-            <select id="endMonth" name="endMonth">
+            <select id="endMonth" name="endMonth" value={educationArray.endMonth}>
                 <option value="Jan">January</option>
                 <option value="Feb">February</option>
                 <option value="Mar">March</option>
